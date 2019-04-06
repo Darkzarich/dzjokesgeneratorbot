@@ -1,0 +1,23 @@
+{
+  "name": "dzjokesgeneratorbot",
+  "version": "0.0.1",
+  "description": "Joke generator Telegram bot made with Nodejs",
+  "main": "index.js",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.30.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darkzarich/dzjokesgeneratorbot.git"
+  },
+  "author": "Dark_zarich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Darkzarich/dzjokesgeneratorbot/issues"
+  },
+  "homepage": "https://github.com/Darkzarich/dzjokesgeneratorbot#readme"
+}
