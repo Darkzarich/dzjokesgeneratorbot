@@ -5,7 +5,9 @@ var TelegramBot = require('node-telegram-bot-api');
 // Устанавливаем токен, который выдавал нам бот.
 var token = '806884996:AAHj1WcKADtoxlJjsQEKcQb3votTSTBSK_g';
 // Включить опрос сервера
-var bot = new TelegramBot(token, {polling: true});
+var port = process.env.PORT || 8443;
+var host = process.env.HOST;
+var bot = new TelegramBot(token, {webHook: {port: port, host: host}});
 
 // Написать мне ... (/echo Hello World! - пришлет сообщение с этим приветствием.)
 bot.onText(/\/echo (.+)/, function (msg, match) {
