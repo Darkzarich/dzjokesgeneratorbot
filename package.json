@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Joke generator Telegram bot made with Nodejs",
   "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "node-telegram-bot-api": "^0.30.0"
   },
