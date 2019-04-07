@@ -29,6 +29,6 @@ bot.onText(/\/joke (.+)/, async function (msg, match) {
 	  }
 	}
 
-	let {data} = await axios.get("https://icanhazdadjoke.com/", config);	
+	let {data} = await axios.get("https://icanhazdadjoke.com/slack", config);	
 	bot.sendMessage(fromId, data.attachments[0].text);
 });
