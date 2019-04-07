@@ -6,6 +6,8 @@ const token = process.env.API_KEY;
 // Включить опрос сервера
 const bot = new TelegramBot(token, {polling: true});
 
+let welcomed = [];
+
 	const options = {
 		reply_markup: JSON.stringify({
 		    keyboard: [
@@ -16,7 +18,12 @@ const bot = new TelegramBot(token, {polling: true});
 	};
 
 bot.onText(/\/start/, async function (msg, match) {
-	bot.sendMessage(msg.from.id, "Hello! 😁 I'm here to throw some jokes at you! 😤 \nNow, shall we begin? 😜 \n Feeling ready, aren't ya? Smash the button right below to start 👇👇👇", options);
+	if (!welcomed.includes(msg.from.id)) {
+		bot.sendMessage(msg.from.id, "Hello! 😁 I'm here to throw some jokes at you! 😤 \nNow, shall we begin? 😜 \n Feeling ready, aren't ya? Smash the button right below to start 👇👇👇", options);
+	}
+	else {
+		bot.sendMessage(msg.from.id, "Sorry, man, I know you already 🙀. No reason to type that again, m'kay? 👀 ", options);
+	}
 });
 
 bot.onText(/Oh, God, I wish I knew more jokes 🙏/, async function (msg, match) {
