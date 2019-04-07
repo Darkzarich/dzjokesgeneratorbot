@@ -10,6 +10,7 @@ const bot = new TelegramBot(token, {polling: true});
 		reply_markup: JSON.stringify({
 		    keyboard: [
 		      [{ text: 'Oh, God, I wish I knew more jokes 🙏'}],
+		      [{ text: '/start'}],
 		    ],
 		    resize_keyboard: true,
 		})
