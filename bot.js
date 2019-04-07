@@ -20,6 +20,7 @@ let welcomed = [];
 bot.onText(/\/start/, async function (msg, match) {
 	if (!welcomed.includes(msg.from.id)) {
 		bot.sendMessage(msg.from.id, "Hello! 😁 I'm here to throw some jokes at you! 😤 \nNow, shall we begin? 😜 \n Feeling ready, aren't ya? Smash the button right below to start 👇👇👇", options);
+		welcomed.push(msg.from.id);
 	}
 	else {
 		bot.sendMessage(msg.from.id, "Sorry, man, I know you already 🙀. No reason to type that again, m'kay? 👀 ", options);
