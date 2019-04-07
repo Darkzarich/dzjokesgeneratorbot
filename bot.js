@@ -21,14 +21,16 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 //     bot.sendPhoto(chatId, photo, {caption: 'Милые котята'});
 // });
 
-bot.onText(/\/joke (.+)/, async function (msg, match) {
+bot.onText(/\/joke (.+)/, function (msg, match) {
+	var fromId = msg.from.id;
 	let config = {
 	  headers: {
 	    header1: 'Accept: application/json',
 	  }
 	}
 
-	let {data} = await axios.get("https://icanhazdadjoke.com/", config);
-	var fromId = msg.from.id;	
-	bot.sendMessage(fromId, data.attachments[0].text);
+	let {data} = axios.get("https://icanhazdadjoke.com/", config).then(
+		(res) => {
+			bot.sendMessage(fromId, data.attachments[0].text);
+		});	
 });
