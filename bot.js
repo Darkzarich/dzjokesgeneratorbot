@@ -1,34 +1,40 @@
-var TelegramBot = require('node-telegram-bot-api');
+const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 
 // Устанавливаем токен, который выдавал нам бот.
-var token = process.env.API_KEY;
+const token = process.env.API_KEY;
 // Включить опрос сервера
 const bot = new TelegramBot(token, {polling: true});
 
-// Написать мне ... (/echo Hello World! - пришлет сообщение с этим приветствием.)
-bot.onText(/\/echo (.+)/, function (msg, match) {
-    var fromId = msg.from.id;
-    var resp = match[1];
-    bot.sendMessage(fromId, resp);
+bot.on('callback_query', function (msg) {
+	switch (msg.data) {
+		case 'more_jokes': 
+			sendJoke(msg.from.id);
+	}
 });
 
-// // Простая команда без параметров.
-// bot.on('message', function (msg) {
-//     var chatId = msg.chat.id;
-//     // Фотография может быть: путь к файлу, поток(stream) или параметр file_id
-//     var photo = 'cats.png';
-//     bot.sendPhoto(chatId, photo, {caption: 'Милые котята'});
-// });
-
 bot.onText(/\/joke/, async function (msg, match) {
-	var fromId = msg.from.id;
-	let config = {
+	sendJoke(msg.from.id);
+});
+
+async function sendJoke (fromId) {
+	const {data} = await getJoke();	
+	const options = {
+		reply_markup: JSON.stringify({
+		    inline_keyboard: [
+		      [{ text: 'I want more jokes!', callback_data: 'more_jokes' }],
+		    ]
+		})
+	};
+
+	bot.sendMessage(fromId, data.attachments[0].text, options);
+}
+
+async function getJoke () {
+	const config = {
 	  headers: {
 	    header1: 'Accept: application/json',
 	  }
 	}
-
-	let {data} = await axios.get("https://icanhazdadjoke.com/slack", config);	
-	bot.sendMessage(fromId, data.attachments[0].text);
-});
+	return await axios.get("https://icanhazdadjoke.com/slack", config)
+}
