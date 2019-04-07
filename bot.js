@@ -21,7 +21,7 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 //     bot.sendPhoto(chatId, photo, {caption: 'Милые котята'});
 // });
 
-bot.onText(/\/joke (.+)/, function (msg, match) {
+bot.onText(/\/joke (.+)/, async function (msg, match) {
 	var fromId = msg.from.id;
 	let config = {
 	  headers: {
@@ -29,8 +29,6 @@ bot.onText(/\/joke (.+)/, function (msg, match) {
 	  }
 	}
 
-	let {data} = axios.get("https://icanhazdadjoke.com/", config).then(
-		(res) => {
-			bot.sendMessage(fromId, data.attachments[0].text);
-		});	
+	let {data} = await axios.get("https://icanhazdadjoke.com/", config);	
+	bot.sendMessage(fromId, data.attachments[0].text);
 });
