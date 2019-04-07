@@ -21,7 +21,7 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 //     bot.sendPhoto(chatId, photo, {caption: 'Милые котята'});
 // });
 
-bot.onText(/\/joke (.+)/, async function (msg, match) {
+bot.onText(/\/joke/, async function (msg, match) {
 	var fromId = msg.from.id;
 	let config = {
 	  headers: {
