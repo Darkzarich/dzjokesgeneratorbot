@@ -21,7 +21,7 @@ async function sendJoke (fromId) {
 	const {data} = await getJoke();	
 	const options = {
 		reply_markup: JSON.stringify({
-		    inline_keyboard: [
+		    reply_keyboard_markup: [
 		      [{ text: 'I want more jokes!', callback_data: 'more_jokes' }],
 		    ]
 		})
